@@ -7,9 +7,11 @@ Reading notes of Effective Java.
 * Item 2: Consider a builder when faced with many constructor parameters
 * Item 3: Enforce the singleton property with a private constructor or an enum type
 * Item 4: Enforce noninstantiability with a private constructor
-* Item 5: Avoid creating unnecessary objects
-* Item 6: Eliminate obsolete object references
-* Item 7: Avoid finalizers
+* Item 5: Prefer dependency injection to hardwiring resources
+* Item 6: Avoid creating unnecessary objects
+* Item 7: Eliminate obsolete object references
+* Item 8: Avoid finalizers and cleaners
+* Item 9: Prefer `try-with-resources` to `try-finally`
 ### 3 Methods Common to All Objects
 * Item 8: Obey the general contract when overriding equals
 * Item 9: Always override hashCode when you override equals
@@ -90,3 +92,6 @@ Reading notes of Effective Java.
 * Item 76: Write readObject methods defensively
 * Item 77: For instance control, prefer enum types to readResolve
 * Item 78: Consider serialization proxies instead of serialized instances
+
+## Resources
+* Source code of the book: [jbloch/effective-java-3e-source-code](https://github.com/jbloch/effective-java-3e-source-code)
