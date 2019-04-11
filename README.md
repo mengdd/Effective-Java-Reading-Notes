@@ -13,11 +13,11 @@ Reading notes of Effective Java.
 * Item 8: Avoid finalizers and cleaners
 * Item 9: Prefer `try-with-resources` to `try-finally`
 ### 3 Methods Common to All Objects
-* Item 8: Obey the general contract when overriding equals
-* Item 9: Always override hashCode when you override equals
-* Item 10: Always override toString
-* Item 11: Override clone judiciously
-* Item 12: Consider implementing Comparable
+* Item 10: Obey the general contract when overriding equals
+* Item 11: Always override hashCode when you override equals
+* Item 12: Always override toString
+* Item 13: Override clone judiciously
+* Item 14: Consider implementing Comparable
 ### 4 Classes and Interfaces
 * Item 13: Minimize the accessibility of classes and members
 * Item 14: In public classes, use accessor methods, not public fields
