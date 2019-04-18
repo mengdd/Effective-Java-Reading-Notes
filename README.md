@@ -31,13 +31,14 @@ Reading notes of Effective Java.
 * Item 24: Favor static member classes over nonstatic
 * Item 25: Limit source files to a single top-level class
 ### 5 Generics
-* Item 23: Don't use raw types in new code
-* Item 24: Eliminate unchecked warnings
-* Item 25: Prefer lists to arrays
-* Item 26: Favor generic types
-* Item 27: Favor generic methods
-* Item 28: Use bounded wildcards to increase API flexibility
-* Item 29: Consider typesafe heterogeneous containers
+* Item 26: Don't use raw types
+* Item 27: Eliminate unchecked warnings
+* Item 28: Prefer lists to arrays
+* Item 29: Favor generic types
+* Item 30: Favor generic methods
+* Item 31: Use bounded wildcards to increase API flexibility
+* Item 32: Combine generics and varargs judiciously
+* Item 33: Consider typesafe heterogeneous containers
 ### 6 Enums and Annotations
 * Item 30: Use enums instead of int constants
 * Item 31: Use instance fields instead of ordinals
