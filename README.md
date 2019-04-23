@@ -40,14 +40,14 @@ Reading notes of Effective Java.
 * Item 32: Combine generics and varargs judiciously
 * Item 33: Consider typesafe heterogeneous containers
 ### 6 Enums and Annotations
-* Item 30: Use enums instead of int constants
-* Item 31: Use instance fields instead of ordinals
-* Item 32: Use `EnumSet` instead of bit fields
-* Item 33: Use `EnumMap` instead of ordinal indexing
-* Item 34: Emulate extensible enums with interfaces
-* Item 35: Prefer annotations to naming patterns
-* Item 36: Consistently use the `Override` annotation
-* Item 37: Use marker interfaces to define types
+* Item 34: Use enums instead of int constants
+* Item 35: Use instance fields instead of ordinals
+* Item 36: Use `EnumSet` instead of bit fields
+* Item 37: Use `EnumMap` instead of ordinal indexing
+* Item 38: Emulate extensible enums with interfaces
+* Item 39: Prefer annotations to naming patterns
+* Item 40: Consistently use the `Override` annotation
+* Item 41: Use marker interfaces to define types
 ### 7 Methods
 * Item 38: Check parameters for validity
 * Item 39: Make defensive copies when needed
