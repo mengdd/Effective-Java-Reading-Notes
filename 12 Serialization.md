@@ -1,4 +1,4 @@
-# Effective Java笔记十 序列化
+# Chapter 12 序列化
 ## 第74条 谨慎地实现Serializable接口
 实现Serializable接口而付出的最大代价是, 一旦一个类被发布, 就大大降低了"改变这个类的实现"的灵活性.
 
