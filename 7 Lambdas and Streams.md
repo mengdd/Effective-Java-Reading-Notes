@@ -46,7 +46,51 @@ map.merge(key, 1, Integer::sum);
 
 结论: 当方法引用比lambda更加简洁的时候, 就用方法引用, 否则就用lambda.
 
-## 第44条 Favor the use of standard functional interfaces
+## 第44条 优先使用标准的函数式接口
+有了lambda之后, 模板方法(Template Method)模式就没有吸引力了, 现代的方法是提供一个接收函数对象的静态工厂或者构造函数来达到相同的效果.
+更一般地, 你需要写更多的以函数对象作为参数的构造器和方法. 要谨慎选择正确的函数参数类型.
+
+`java.util.function`包中提供了一系列标准的函数式接口(一共43个).
+
+六个基本的函数式接口:
+* `UnaryOperator<T>`: 一个参数, 返回值类型和参数相同.
+* `BinaryOperator<T>`: 两个参数, 返回值类型和参数相同.
+* `Predicate<T>`: 一个参数, 返回一个boolean.
+* `Function<T,R>`: 参数和返回值类型不同.
+* `Supplier<T>`: 无参数, 有返回值.
+* `Consumer<T>`: 有参数, 无返回值.
+
+每个基本接口都有3种变型, 对应基本类型: int, long和double, 接口名字会加上类型的前缀. (6*3=18个)
+
+`Function`接口还有9种变型, 对应结果的不同基本类型. 
+如果源和结果都是基本类型, 加上前缀`SrcToResult`, 比如`LongToIntFunction`. (6种).
+如果源是基本类型, 结果是对象引用, 加上前缀`SrcToObj`, 比如`DoubleToObjFunction`. (3种).
+
+有三个基本的函数式接口都有双参数版本, 共有9种变型:
+* `BiPredicate<T, U>` (1种).
+* `BiFunction<T, U, R>`: 有三种返回不同基本类型的变种. (4种).
+* `BiConsumer<T>`: 还有接受一个基本类型和一个对象引用的变种. (4种).
+
+最后还有`BooleanSupplier`是一个返回布尔值的Supplier变型.
+
+大多数的标准函数式接口仅是为了提供基本类型(primitive types)支持而存在. 
+不要用基本函数式接口搭配装箱基本类型(basic functional interfaces with boxed primitives)来代替基本类型的函数式接口(primitive functional interfaces).
+
+那什么时候应该写自己的函数式接口呢?
+* 没有标准的函数式接口能够满足需求. -> 比如参数个数不同, 或者要抛出一个受检异常.
+* 有结构相同的标准函数式接口, 有一些情况也应该写自己的函数式接口. 
+比如`Comparator<T>`和`ToIntBiFunction<T,T>`结构相同, 但是仍然用`Comparator`, 好处: 名字; 通用协议; 有用的默认方法.
+
+如果你要自己写一个函数式接口而不是用标准的, 你要考虑它是不是和`Comparator`一样拥有(一个或多个)以下特性:
+* 它通用, 会得益于有一个描述性的名字.
+* 它与一个很强的协议相关.
+* 它会得益于自定义的默认方法.
+
+永远记住用注解`@FunctionalInterface`来标记你的函数式接口.
+
+提供方法重载的时候要注意, 不要给同一个方法提供函数式接口在同一个参数位置的重载(有可能会引起二义性). 比如: `ExecutorService`的`submit`方法.
+这需要客户端代码进行强转来指明正确的重载.
+
 ## 第45条 Use streams judiciously
 ## 第46条 Prefer side-effect-free functions in streams
 ## 第47条 Prefer Collection to Stream as a return type
