@@ -135,6 +135,44 @@ stream擅长的事情:
 
 有时候迭代循环和stream都能很好地解决问题(例: 遍历扑克牌组合), 具体选哪一种看情况(更喜欢哪个就用哪个, 同事是否接受你的偏好等).
 
-## 第46条 Prefer side-effect-free functions in streams
+## 第46条 优先使用stream中没有副作用的方法
+Streams不仅是API, 它是基于函数式编程的饿一个范式.
+
+Streams范式中最重要的一点: 把计算组织成一系列的转换, 每一个阶段都尽量是前一个阶段结果的单纯函数(pure function: 无状态 -> free of side-effects).
+注意: pure function的结果只依赖于自己的输入, 不会依赖于任何mutable的状态, 也不会修改任何状态.
+
+举例: 统计单词频次: `forEach` -> bad; `collect` -> good.
+
+Stream中的`forEach`有着浓烈的迭代气息, 应该只被用来报告结果, 不应该用来进行计算, 通常是bad smell.
+
+```
+freq.keySet().stream() 
+.sorted(comparing(freq::get).reversed()) 
+.limit(10)
+.collect(toList()); // 静态引入了Collectors
+```
+
+Collectors API主要是封装了降维操作(reduction strategy), 它的结果通常是一个集合.
+
+注: Scanner的`stream`方法是Java 9加的, 之前的版本可以用`streamOf(Iterable<E>)`.
+
+Collectors API中的方法(一共有39个):
+* `toList()`, `toSet()`, `toCollection(collectionFactory)`: 把stream中的元素放在一个集合中.
+* `toMap(keyMapper, valueMapper)`: 参数的两个方法, 一个把元素转换到key, 一个转换到value. -> 冲突的时候会抛异常.
+* `toMap(keyMapper, valueMapper, mergeFunction)`: 同样key的value会merge. 应用1: 选择value, 例: 选择歌手最畅销的唱片; 应用2: 最后的value胜出.
+* `toMap(keyMapper, valueMapper, mergeFunction, mapSupplier)`: mapSupplier是一个map工厂, 用来指定具体的map实现: EnumMap或TreeMap.
+* 三个`toMap`方法都有相应的`toConcurrentMap`方法, 创建`ConcurrentHashMap`实例.
+* `groupingBy(classifier)`方法用来返回按照类别分组的元素, 分类器(classifier function)返回元素应属于的类别(category), 作为map的key.
+* `groupingBy(classifier, downstream)`: downstream将对分类中的所有元素进一步处理, 可以`toSet()`, `toCollection()`或者`counting()`.
+* `groupingBy(classifier, mapFactory, downstream)`: 可以同时控制map和集合的实现类型, 比如一个`TreeMap`, 包含`TreeSet`.
+* 类似的, 三个`groupingBy`方法的重载都提供`groupingByConcurrent`方法.
+* `partitioningBy(predicate)`返回key为`Boolean`类型的map, 还有一种重载形式加了downstream参数.
+* 仅用作downstream的方法. 比如`counting`, 以`summing`, `averaging`, `summarizing`开头的方法, `Stream`中都有相应的方法. 还有`reducing`, `filtering`, `mapping`, `flatMapping`, `collectingAndThen`等.
+* `minBy`和`maxBy`是`BinaryOperator`中相应方法的类似物.
+* `joining`: 有三种重载, 以特定分隔符和前后缀组合字符串.
+
+
+注: 文档: [Java 8 Collectors](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html).
+
 ## 第47条 Prefer Collection to Stream as a return type
 ## 第48条 Use caution when making streams parallel
