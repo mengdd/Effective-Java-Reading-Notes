@@ -91,7 +91,50 @@ map.merge(key, 1, Integer::sum);
 提供方法重载的时候要注意, 不要给同一个方法提供函数式接口在同一个参数位置的重载(有可能会引起二义性). 比如: `ExecutorService`的`submit`方法.
 这需要客户端代码进行强转来指明正确的重载.
 
-## 第45条 Use streams judiciously
+## 第45条 谨慎使用streams
+### Stream API介绍
+Java 8新增的streams API主要是为了更方便地进行批量操作, 串行的或者并行的.
+两个关键的抽象: 
+* stream: 有限或无限的数据元素序列. (支持对象引用或基本类型: int, long, double).
+* stream pipeline: 对这些元素进行的多级运算. (0个或多个intermediate operations和一个terminal operation).
+
+stream pipeline的运算是lazy的, 只有当terminal operation被触发的时候才会开始进行运算, 对最终操作不必要的数据将不会被运算(无限数据成为可能).
+
+streams API是流式的.
+
+### 为什么要谨慎使用Streams
+适当地使用streams API可以让程序更简洁, 但是使用不当(过度使用)可能会降低可读性和可维护性.
+
+举例: 寻找anagram(相同字母异序词).
+Java 8新增方法: `computeIfAbsent`.
+
+关于steam pipeline的可读性:
+* 缺少明确的类型时, lambda参数的良好命名是必要的.
+* 使用辅助方法, 提取逻辑并命名.
+
+不要用stream来处理char values, 因为它们是int值, 需要强转.
+
+### Stream和循环迭代的比较
+stream pipeline使用函数对象(function objects), 通常是lambda和方法引用; 循环迭代(iterative code)使用的是代码块.
+
+代码块可以做但是函数对象不能做的事情(循环可以做, 但stream不可以做):
+* 代码块中可以读取和修改scope中的任何局部变量; lambda中只能读取final的, 不能修改任何局部变量.
+* 循坏代码块中可以return, break或continue, 抛出方法声明的受检异常; lambda中不能做这些.
+
+stream擅长的事情:
+* 统一处理元素序列.
+* 过滤.
+* 联合元素的运算(加, 连接, 算最小值等).
+* 将元素序列累积到集合中, 或分组.
+* 查询.
+
+用stream的时候比较难做到的一点是, 在pipeline的处理过程中, 很难找到对应的原来元素: 一旦map到新的值了, 前面的值就丢了.
+比较lame的做法是用个pair, 还可以考虑在需要原始值的时候反向map.
+
+例子: 打印20个梅森质数(Mersenne primes): 2的n次方仍然是个质数. 现在想找出对应的n -> 加一个反向运算.
+
+有时候迭代循环和stream都能很好地解决问题(例: 遍历扑克牌组合), 具体选哪一种看情况(更喜欢哪个就用哪个, 同事是否接受你的偏好等).
+
 ## 第46条 Prefer side-effect-free functions in streams
 ## 第47条 Prefer Collection to Stream as a return type
 ## 第48条 Use caution when making streams parallel
