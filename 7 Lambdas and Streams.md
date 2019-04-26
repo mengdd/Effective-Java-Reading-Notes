@@ -174,5 +174,35 @@ Collectors API中的方法(一共有39个):
 
 注: 文档: [Java 8 Collectors](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html).
 
-## 第47条 Prefer Collection to Stream as a return type
+## 第47条 优先使用Collection而不是Stream作为返回值
+`Stream`虽然有一个符合`Iterable`接口的规定的用于遍历的方法, 但是`Stream`却没有继承`Interable`接口. 
+所以想要遍历Stream, 需要提供一个适配方法:
+```
+// Adapter from  Stream<E> to Iterable<E>
+public static <E> Iterable<E> iterableOf(Stream<E> stream) {
+       return stream::iterator;
+}
+```
+
+如果想要用stream pipeline处理一个Iterable的接口, 也需要写个适配方法:
+```
+// Adapter from Iterable<E> to Stream<E>
+public static <E> Stream<E> streamOf(Iterable<E> iterable) {
+       return StreamSupport.stream(iterable.spliterator(), false);
+}
+```
+
+如果你在写一个方法, 返回一系列的对象, 你应该为使用者要用stream pipeline和for-each的两种可能性都做好准备.
+
+`Collection`接口是`Iterable`的子类型, 还有一个`stream`方法, 所以`Collection`或其一个合适的子类型, 通常是返回序列的公有方法返回值的最好选择.
+
+数组有`Arrays.asList`和`Stream.of`方法.
+
+但是不要把很大的序列放在内存中, 仅仅是为了作为集合返回. -> 举例: PowerSet. -> 自定义collection.
+自定义集合可以限制元素大小, 但如果数据太大或者数量不确定, 可以考虑用stream或者iterable.
+
+有时候也会根据实现的方法更直观而选择返回类型, 例子: 用stream处理生成字符串子集集合.
+
+PS: 如果以后`Stream`继承了`Iterable`, 就可以自由返回stream了, 因为这样就两种可能性(流式, 遍历)都提供了.
+
 ## 第48条 Use caution when making streams parallel
