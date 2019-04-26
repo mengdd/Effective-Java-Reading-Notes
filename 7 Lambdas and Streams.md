@@ -108,7 +108,7 @@ streams API是流式的.
 举例: 寻找anagram(相同字母异序词).
 Java 8新增方法: `computeIfAbsent`.
 
-关于steam pipeline的可读性:
+关于stream pipeline的可读性:
 * 缺少明确的类型时, lambda参数的良好命名是必要的.
 * 使用辅助方法, 提取逻辑并命名.
 
@@ -205,4 +205,30 @@ public static <E> Stream<E> streamOf(Iterable<E> iterable) {
 
 PS: 如果以后`Stream`继承了`Iterable`, 就可以自由返回stream了, 因为这样就两种可能性(流式, 遍历)都提供了.
 
-## 第48条 Use caution when making streams parallel
+## 第48条 把流变为并行时要多加小心
+如果一个pipeline的source是从Stream.iterate来的, 或者`limit`作为方法在其中被使用了, 那么把这个pipeline变为并行是不太可能提高性能的.
+举例: 寻找20个梅森素数的例子, 加上`parallel()`方法之后程序不输出了, 只能强制停止.
+
+不要不加选择地把stream并行化, 性能影响可能是灾难性的.
+
+### 数据结构
+并行的性能增益在这些流上是最好的: `ArrayList`, `HashMap`, `HashSet`, `ConcurrentHashMap`实例; 数组; int ranges; long ranges.
+这些数据结构的的共同特点:
+* 它们都可以准确且廉价地分成任何所需大小的子集, 这使得在并行线程之间划分工作变得容易.
+* 它们都提供了优秀的引用地址(locality of reference): 顺序元素引用在内存中存储在一起. 
+引用地址(Locality-of-reference)对于并行化批量操作至关重要. 没有它, 线程将会大部分时间空闲, 等待数据从内存传输到处理器缓存中.
+
+### stream pipeline的最终操作也会影响并行的执行.
+如果比起整个pipeline的工作来说, 最终操作承担了大量的工作, 而且这个操作还是串行的, 那么把pipeline并行化的作用很有限.
+对并行来说, 最好的最终操作是降维操作(reductions), 比如`reduce`, `max`, `min`, `count`, `sum`.
+短路操作比如`anyMatch`, `allMatch`, `nonMatch`对于并行来说也适用.
+但是Stream的`collect`方法(mutable reductions), 就不是很适合并行了, 因为合并集合开销大.
+
+
+如果你自己实现`Stream`, `Iterable`或者`Collection`, 想要比较好的并行性能, 你必须覆写`spliterator`方法, 并且广泛地测试流的并行性能.
+
+并行化流不仅会导致性能不佳，包括活动失败(liveness failures); 它可能导致不正确的结果和不可预测的行为(safety failures).
+
+在正确的情形下, 在stream pipeline上加上`parallel`调用是有可能实现处理器内核数量的近线性加速的.
+
+如果要平行的流是随机数字的, 应该使用`SplittableRandom`, 而不是`ThreadLocalRandom`(单线程用), 或`Random`(每个操作都同步).
