@@ -57,13 +57,14 @@ Reading notes of Effective Java.
 * Item 47: Prefer Collection to Stream as a return type
 * Item 48: Use caution when making streams parallel
 ### 8 Methods
-* Item 38: Check parameters for validity
-* Item 39: Make defensive copies when needed
-* Item 40: Design method signatures carefully
-* Item 41: Use overloading judiciously
-* Item 42: Use varargs judiciously
-* Item 43: Return empty arrays or collections, not nulls
-* Item 44: Write doc comments for all exposed API elements
+* Item 49: Check parameters for validity
+* Item 50: Make defensive copies when needed
+* Item 51: Design method signatures carefully
+* Item 52: Use overloading judiciously
+* Item 53: Use varargs judiciously
+* Item 54: Return empty arrays or collections, not nulls
+* Item 55: Return optionals judiciously
+* Item 56: Write doc comments for all exposed API elements
 ### 9 General Programming
 * Item 45: Minimize the scope of local variables
 * Item 46: Prefer for-each loops to traditional `for` loops
