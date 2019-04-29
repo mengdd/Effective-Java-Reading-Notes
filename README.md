@@ -66,18 +66,18 @@ Reading notes of Effective Java.
 * Item 55: Return optionals judiciously
 * Item 56: Write doc comments for all exposed API elements
 ### 9 General Programming
-* Item 45: Minimize the scope of local variables
-* Item 46: Prefer for-each loops to traditional `for` loops
-* Item 47: Know and use the libraries
-* Item 48: Avoid float and double if exact answers are required
-* Item 49: Prefer primitive types to boxed primitives
-* Item 50: Avoid strings where other types are more appropriate
-* Item 51: Beware the performance of string concatenation
-* Item 52: Refer to objects by their interfaces
-* Item 53: Prefer interfaces to reflection
-* Item 54: Use native methods judiciously
-* Item 55: Optimize judiciously
-* Item 56: Adhere to generally accepted naming conventions
+* Item 57: Minimize the scope of local variables
+* Item 58: Prefer for-each loops to traditional `for` loops
+* Item 59: Know and use the libraries
+* Item 60: Avoid `float` and `double` if exact answers are required
+* Item 61: Prefer primitive types to boxed primitives
+* Item 62: Avoid strings where other types are more appropriate
+* Item 63: Beware the performance of string concatenation
+* Item 64: Refer to objects by their interfaces
+* Item 65: Prefer interfaces to reflection
+* Item 66: Use native methods judiciously
+* Item 67: Optimize judiciously
+* Item 68: Adhere to generally accepted naming conventions
 ### 10 Exceptions
 * Item 57: Use exceptions only for exceptional conditions
 * Item 58: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors
