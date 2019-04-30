@@ -79,15 +79,15 @@ Reading notes of Effective Java.
 * Item 67: Optimize judiciously
 * Item 68: Adhere to generally accepted naming conventions
 ### 10 Exceptions
-* Item 57: Use exceptions only for exceptional conditions
-* Item 58: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors
-* Item 59: Avoid unnecessary use of checked exceptions
-* Item 60: Favor the use of standard exceptions
-* Item 61: Throw exceptions appropriate to the abstraction
-* Item 62: Document all exceptions thrown by each method
-* Item 63: Include failure-capture information in detail messages
-* Item 64: Strive for failure atomicity
-* Item 65: Don’t ignore exceptions
+* Item 69: Use exceptions only for exceptional conditions
+* Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors
+* Item 71: Avoid unnecessary use of checked exceptions
+* Item 72: Favor the use of standard exceptions
+* Item 73: Throw exceptions appropriate to the abstraction
+* Item 74: Document all exceptions thrown by each method
+* Item 75: Include failure-capture information in detail messages
+* Item 76: Strive for failure atomicity
+* Item 77: Don’t ignore exceptions
 ### 11 Concurrency
 * Item 66: Synchronize access to shared mutable data
 * Item 67: Avoid excessive synchronization
