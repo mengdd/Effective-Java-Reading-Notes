@@ -89,20 +89,20 @@ Reading notes of Effective Java.
 * Item 76: Strive for failure atomicity
 * Item 77: Don’t ignore exceptions
 ### 11 Concurrency
-* Item 66: Synchronize access to shared mutable data
-* Item 67: Avoid excessive synchronization
-* Item 68: Prefer executors and tasks to threads
-* Item 69: Prefer concurrency utilities to `wait` and `notify`
-* Item 70: Document thread safety
-* Item 71: Use lazy initialization judiciously
-* Item 72: Don’t depend on the thread scheduler
-* Item 73: Avoid thread groups
+* Item 78: Synchronize access to shared mutable data
+* Item 79: Avoid excessive synchronization
+* Item 80: Prefer executors and tasks and streams to threads
+* Item 81: Prefer concurrency utilities to `wait` and `notify`
+* Item 82: Document thread safety
+* Item 83: Use lazy initialization judiciously
+* Item 84: Don’t depend on the thread scheduler
 ### 12 Serialization
-* Item 74: Implement Serializable judiciously
-* Item 75: Consider using a custom serialized form
-* Item 76: Write readObject methods defensively
-* Item 77: For instance control, prefer enum types to readResolve
-* Item 78: Consider serialization proxies instead of serialized instances
+* Item 85: Prefer alternatives to Java serialization
+* Item 86: Implement `Serializable` with great caution
+* Item 87: Consider using a custom serialized form
+* Item 88: Write `readObject` methods defensively
+* Item 89: For instance control, prefer enum types to `readResolve`
+* Item 90: Consider serialization proxies instead of serialized instances
 
 ## Resources
 * Source code of the book: [jbloch/effective-java-3e-source-code](https://github.com/jbloch/effective-java-3e-source-code)
