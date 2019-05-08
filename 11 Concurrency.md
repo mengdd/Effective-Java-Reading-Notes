@@ -73,7 +73,7 @@ Java 7开始, Executor Framework支持fork-join tasks, 被一种特殊的executo
 
 并行的streams就是在fork join pools之上写的, 允许你很容易就能利用其性能提升.
 
-## 第81条 并发工具优先于wait和notify
+## 第81条 并发工具优先于`wait`和`notify`
 concurrent中工具分为三类:
 * Executor Framework.
 * 并发集合. -> 为标准集合接口提供了高性能的并发实现.
