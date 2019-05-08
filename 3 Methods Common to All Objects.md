@@ -2,7 +2,7 @@
 本章讲何时以及如何覆盖`Object`的非final的方法. 
 `Comparable.compareTo`方法具有类似特征, 所以也放在本章讨论. 
 
-## 第10条 覆盖equals时请遵守通用约定
+## 第10条 覆盖`equals`时请遵守通用约定
 如果不覆盖`equals`方法, 类的每个实例都只与它自身相等. 
 如果满足以下任何一个条件, 就不需要覆盖`equals`方法: 
 - 类的每个实例本质上都是唯一的. (代表活动实体的类如Thread.)
@@ -31,7 +31,7 @@
 
 注意覆写方法加上`@Override`, `equals`方法的参数类型是`Object`, 不要弄错.
 
-## 第11条 覆盖equals时总要覆盖hashCode
+## 第11条 覆盖`equals`时总要覆盖`hashCode`
 在每个覆盖了`equals`方法的类中, 也必须覆盖`hashCode`方法. 
 如果不这样做的话, 就会违反`Object.hashCode`的通用约定, 从而导致该类无法结合所有基于散列的集合一起正常运作, 这样的集合包括`HashMap`, `HashSet`和`Hashtable`.
 
@@ -52,7 +52,7 @@ Hashcode的计算:
 如果一个类是不可变的, 并且计算hashCode的开销也比较大, 就应该考虑把hashCode缓存在对象内部.
 
 
-## 第12条 始终要覆盖toString
+## 第12条 始终要覆盖`toString`
 `Object`类的`toString`实现: `类名@散列码的无符号十六进制表示法`.
 
 当对象被传递给`println`, `printf`, 字符串联操作符(+)以及`assert`或者被调试器打印出来时, `toString`方法会被自动调用.
@@ -69,7 +69,7 @@ Hashcode的计算:
 如果不这么做, 如果想获取某个信息, 就得解析字符串, 降低性能, 解析过程也易出错, 会导致系统不稳定, 如果格式发生变化, 还会导致系统崩溃.
 
 
-## 第13条 谨慎地覆盖clone
+## 第13条 谨慎地覆盖`clone`
 `Cloneable`接口没有包含任何方法. 
 它决定了`Object`中受保护的`clone`方法实现的行为: 
 如果一个类实现了`Cloneable`, `Object`的`clone`方法返回该对象的逐域拷贝, 否则就会抛出`CloneNotSupportedException`. (接口的一种极端非典型的用法.)
@@ -105,7 +105,7 @@ immutable的类不应该提供`clone`方法.
 另一个实现对象拷贝的方法(更好的方法)是提供一个拷贝构造器或者拷贝工厂.
 
 
-## 第14条 考虑实现Comparable接口
+## 第14条 考虑实现`Comparable`接口
 `compareTo`方法是`Comparable`接口中唯一的方法, 允许进行等同性和顺序比较: 
 将对象与指定的对象进行比较, 当该对象小于, 等于或大于指定对象的时候, 分别返回一个负整数, 零或正整数.
 
