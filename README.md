@@ -111,4 +111,5 @@ Effective Java读书笔记.
 * Item 90: 考虑用序列化代理代替序列化实例
 
 ## Resources
-* Source code of the book: [jbloch/effective-java-3e-source-code](https://github.com/jbloch/effective-java-3e-source-code)
+* [英文版目录](https://github.com/mengdd/Effective-Java-Reading-Notes/blob/master/README.en.md)
+* 本书源代码: [jbloch/effective-java-3e-source-code](https://github.com/jbloch/effective-java-3e-source-code)
